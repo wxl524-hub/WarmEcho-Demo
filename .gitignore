@@ -9,6 +9,9 @@ dist/
 .env.local
 .env.*.local
 
+# 运行时数据（聊天记录、用户数据等）
+server/data/*.json
+
 # IDE
 .vscode/
 .idea/

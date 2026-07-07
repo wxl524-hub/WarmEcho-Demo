@@ -197,11 +197,12 @@ export function useTTS() {
     }
     // 默认音色列表（拟人化名字 + 本地头像）
     const ts = Date.now()
+    const base = import.meta.env.BASE_URL
     return [
-      { id: 'xiaonuan', name: '小暖', label: '温柔女声', gender: 'female', style: '温柔治愈', avatar: '/avatars/xiaonuan.jpg?t=' + ts },
-      { id: 'zhiqiu', name: '知秋', label: '知性女声', gender: 'female', style: '知性温暖', avatar: '/avatars/zhiqiu.jpg?t=' + ts },
-      { id: 'achen', name: '阿沉', label: '沉稳男声', gender: 'male', style: '沉稳可靠', avatar: '/avatars/achen.jpg?t=' + ts },
-      { id: 'shenyan', name: '深言', label: '深情男声', gender: 'male', style: '深情内敛', avatar: '/avatars/shenyan.jpg?t=' + ts }
+      { id: 'xiaonuan', name: '小暖', label: '温柔女声', gender: 'female', style: '温柔治愈', avatar: base + 'avatars/xiaonuan.jpg?t=' + ts },
+      { id: 'zhiqiu', name: '知秋', label: '知性女声', gender: 'female', style: '知性温暖', avatar: base + 'avatars/zhiqiu.jpg?t=' + ts },
+      { id: 'achen', name: '阿沉', label: '沉稳男声', gender: 'male', style: '沉稳可靠', avatar: base + 'avatars/achen.jpg?t=' + ts },
+      { id: 'shenyan', name: '深言', label: '深情男声', gender: 'male', style: '深情内敛', avatar: base + 'avatars/shenyan.jpg?t=' + ts }
     ]
   }
 

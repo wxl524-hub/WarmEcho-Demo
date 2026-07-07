@@ -1,0 +1,20 @@
+{
+  "name": "暖声 WarmEcho",
+  "short_name": "暖声",
+  "description": "温暖的情绪树洞，AI陪伴倾听你的每一个故事",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FFF9F2",
+  "theme_color": "#E8A598",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ],
+  "categories": ["lifestyle", "health"],
+  "lang": "zh-CN"
+}

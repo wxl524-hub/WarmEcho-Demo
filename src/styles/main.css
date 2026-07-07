@@ -1,0 +1,512 @@
+/* ===== 设计系统 Token ===== */
+:root {
+  /* 色彩 */
+  --color-bg: #FFF8F0;
+  --color-bg-alt: #FFF0E0;
+  --color-bg-surface: #FFFFFF;
+  --color-ink: #2D2A26;
+  --color-ink-secondary: #5C554B;
+  --color-muted: #8B7E72;
+  --color-rule: #E8DED0;
+  --color-primary: #D97706;
+  --color-primary-light: #F59E0B;
+  --color-primary-pale: rgba(245, 158, 11, 0.15);
+  --color-accent: #E11D48;
+  --color-accent-light: #FB7185;
+
+  /* 字体 */
+  --font-body: WorkSans, 'PingFang SC', 'Microsoft YaHei', system-ui, -apple-system, sans-serif;
+  --font-heading: YoungSerif, 'PingFang SC', 'Microsoft YaHei', serif;
+  --font-mono: GeistMono, 'SFMono-Regular', Consolas, monospace;
+
+  /* 间距 */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+  --space-3xl: 4rem;
+  --space-4xl: 6rem;
+
+  /* 圆角 */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-full: 9999px;
+
+  /* 字号 */
+  --text-hero: clamp(2.5rem, 6vw, 4.5rem);
+  --text-4xl: 2.25rem;
+  --text-3xl: 1.875rem;
+  --text-2xl: 1.5rem;
+  --text-xl: 1.25rem;
+  --text-lg: 1.125rem;
+  --text-base: 1rem;
+  --text-sm: 0.875rem;
+  --text-xs: 0.75rem;
+}
+
+/* ===== CSS Reset ===== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-bg);
+  color: var(--color-ink);
+  line-height: 1.6;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font-family: inherit;
+  background: none;
+}
+
+input,
+textarea {
+  font-family: inherit;
+  outline: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* ===== 全局容器 ===== */
+.app-container {
+  max-width: 480px;
+  margin: 0 auto;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ===== 页面切换淡入淡出动画 ===== */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.fade-enter-from {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.fade-leave-to {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
+/* ===== 消息滑入动画 ===== */
+.message-enter-active {
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.message-leave-active {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.message-enter-from {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.message-leave-to {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
+/* ===== 毛玻璃效果 ===== */
+.glass {
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* ===== 滚动条美化 ===== */
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(139, 126, 114, 0.4);
+  border-radius: var(--radius-sm);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(139, 126, 114, 0.6);
+}
+
+/* ===== 通用按钮样式 ===== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-full);
+  padding: 12px 24px;
+  font-size: var(--text-base);
+  font-weight: 500;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background-color: var(--color-primary);
+  color: #fff;
+  box-shadow: 0 4px 15px rgba(217, 119, 6, 0.35);
+}
+
+.btn-primary:hover {
+  transform: scale(1.05);
+  background-color: var(--color-primary-light);
+  box-shadow: 0 6px 20px rgba(217, 119, 6, 0.45);
+}
+
+.btn-primary:active {
+  transform: scale(0.98);
+}
+
+.btn-glass {
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: var(--color-ink);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 2px 10px rgba(45, 42, 38, 0.05);
+}
+
+.btn-glass:hover {
+  background: rgba(255, 255, 255, 0.85);
+  box-shadow: 0 4px 15px rgba(45, 42, 38, 0.08);
+}
+
+/* ===== 选择文本颜色 ===== */
+::selection {
+  background: var(--color-primary-pale);
+  color: var(--color-ink);
+}
+
+::-moz-selection {
+  background: var(--color-primary-pale);
+  color: var(--color-ink);
+}
+
+/* ===== 移动端适配 ===== */
+@media (max-width: 480px) {
+  .app-container {
+    max-width: 100%;
+  }
+
+  html {
+    font-size: 15px;
+  }
+}
+
+@media (min-width: 481px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+/* ===== 小屏幕适配 (iPhone SE等 < 375px) ===== */
+@media (max-width: 360px) {
+  html {
+    font-size: 14px;
+  }
+
+  .btn,
+  .welcome-btn,
+  .primary-btn,
+  .submit-btn {
+    padding: 10px 20px;
+    font-size: var(--text-sm);
+  }
+}
+
+/* ===== 安全区域适配 (刘海屏/全面屏) ===== */
+@supports (padding-top: env(safe-area-inset-top)) {
+  .app-container {
+    padding-top: env(safe-area-inset-top);
+  }
+}
+
+/* ===== 触摸目标优化 ===== */
+@media (hover: none) and (pointer: coarse) {
+  button,
+  .back-btn,
+  .extra-link,
+  .voice-item,
+  .gallery-card,
+  .data-action-btn {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  .back-btn {
+    padding: 8px 12px;
+  }
+
+  .send-btn,
+  .mic-btn,
+  .voice-toggle,
+  .voice-selector-btn {
+    min-width: 44px;
+    min-height: 44px;
+    width: 44px;
+    height: 44px;
+  }
+}
+
+/* ===== 横屏适配 ===== */
+@media (max-height: 500px) and (orientation: landscape) {
+  .welcome-container {
+    padding: 20px 24px;
+  }
+
+  .welcome-title {
+    font-size: var(--text-2xl);
+  }
+
+  .welcome-btn {
+    margin-top: 20px;
+    padding: 10px 36px;
+  }
+
+  .welcome-footer {
+    display: none;
+  }
+}
+
+/* ===== 隐藏滚动条但可滚动 ===== */
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* ===== 闪烁光标动画 ===== */
+@keyframes blink {
+  0%, 50% {
+    opacity: 1;
+  }
+  51%, 100% {
+    opacity: 0;
+  }
+}
+
+/* ===== 三点加载动画 ===== */
+@keyframes dot-pulse {
+  0%, 80%, 100% {
+    opacity: 0.3;
+    transform: scale(0.8);
+  }
+  40% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+.dot-typing {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 0;
+}
+
+.dot-typing span {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--color-ink);
+  animation: dot-pulse 1.4s ease-in-out infinite;
+}
+
+.dot-typing span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.dot-typing span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+/* ===== 深夜模式 (22:00-02:00) =====
+   通过 html[data-theme="night"] 切换；
+   仅覆盖色彩 Token，间距/字体/圆角保持一致 */
+html[data-theme="night"] {
+  --color-bg: #1F1A14;
+  --color-bg-alt: #2A2218;
+  --color-bg-surface: #2F2619;
+  --color-ink: #F2E6D0;
+  --color-ink-secondary: #C9B89A;
+  --color-muted: #8C7B62;
+  --color-rule: #3E3325;
+  --color-primary: #F59E0B;
+  --color-primary-light: #FBBF24;
+  --color-primary-pale: rgba(245, 158, 11, 0.22);
+  --color-accent: #FB7185;
+  --color-accent-light: #FCA5A5;
+}
+
+/* 深夜模式下毛玻璃调整为深色玻璃 */
+html[data-theme="night"] .glass {
+  background: rgba(47, 38, 25, 0.55);
+  border: 1px solid rgba(245, 158, 11, 0.12);
+}
+
+html[data-theme="night"] .btn-glass {
+  background: rgba(47, 38, 25, 0.6);
+  color: var(--color-ink);
+  border: 1px solid rgba(245, 158, 11, 0.18);
+}
+
+html[data-theme="night"] .btn-glass:hover {
+  background: rgba(47, 38, 25, 0.85);
+}
+
+/* 深夜模式欢迎页/对话页降低亮度 */
+html[data-theme="night"] body {
+  background-color: var(--color-bg);
+}
+
+/* 平滑切换主题 */
+html {
+  transition: background-color 0.6s ease;
+}
+
+html[data-theme="night"] .welcome-title,
+html[data-theme="night"] .gallery-title,
+html[data-theme="night"] .quote-text {
+  color: var(--color-primary-light);
+}
+
+html[data-theme="night"] .onboarding-page {
+  background: linear-gradient(180deg, var(--color-bg) 0%, #2A2218 100%);
+}
+
+html[data-theme="night"] .login-page {
+  background: linear-gradient(135deg, var(--color-bg) 0%, #2A2218 100%);
+}
+
+html[data-theme="night"] .login-container {
+  background: var(--color-bg-surface);
+}
+
+html[data-theme="night"] .form-input {
+  background: var(--color-bg-alt);
+  color: var(--color-ink);
+  border-color: var(--color-rule);
+}
+
+html[data-theme="night"] .search-box {
+  background: var(--color-bg-surface);
+}
+
+html[data-theme="night"] .search-input {
+  color: var(--color-ink);
+}
+
+html[data-theme="night"] .filter-chip {
+  background: var(--color-bg-surface);
+  color: var(--color-ink-secondary);
+}
+
+html[data-theme="night"] .filter-chip:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+html[data-theme="night"] .gallery-card {
+  background: var(--color-bg-surface);
+}
+
+html[data-theme="night"] .item-card {
+  background: var(--color-bg-surface);
+}
+
+html[data-theme="night"] .stat-card,
+html[data-theme="night"] .chart-card,
+html[data-theme="night"] .emotion-card,
+html[data-theme="night"] .advice-card {
+  background: var(--color-bg-surface);
+}
+
+html[data-theme="night"] .data-card,
+html[data-theme="night"] .measures-card,
+html[data-theme="night"] .promise-card,
+html[data-theme="night"] .roadmap-card {
+  background: var(--color-bg-surface);
+}
+
+html[data-theme="night"] .tab-bar {
+  background: var(--color-bg-alt);
+}
+
+html[data-theme="night"] .confirm-dialog {
+  background: var(--color-bg-surface);
+}
+
+html[data-theme="night"] .post-modal-panel,
+html[data-theme="night"] .detail-panel,
+html[data-theme="night"] .voice-picker-panel {
+  background: var(--color-bg-surface);
+}
+
+html[data-theme="night"] .post-textarea {
+  background: var(--color-bg-alt);
+  color: var(--color-ink);
+}
+
+html[data-theme="night"] .comfort-input {
+  background: var(--color-bg-alt);
+  color: var(--color-ink);
+}
+
+html[data-theme="night"] .comfort-item {
+  background: var(--color-bg-alt);
+}
+
+html[data-theme="night"] .bar-track {
+  background: var(--color-bg-alt);
+}
+
+html[data-theme="night"] .bar-dim {
+  background: var(--color-rule);
+}
+
+html[data-theme="night"] .feature-tag {
+  background: var(--color-primary-pale);
+  color: var(--color-primary-light);
+}

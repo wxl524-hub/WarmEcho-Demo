@@ -75,6 +75,18 @@
         </button>
       </form>
 
+      <div class="demo-account">
+        <div class="demo-title">测试账号</div>
+        <div class="demo-row">
+          <span class="demo-label">邮箱</span>
+          <span class="demo-value">demo@warmecho.com</span>
+        </div>
+        <div class="demo-row">
+          <span class="demo-label">密码</span>
+          <span class="demo-value">demo1234</span>
+        </div>
+      </div>
+
       <div class="guest-hint">
         <span>不想注册？</span>
         <router-link to="/" class="guest-link">以游客身份使用</router-link>
@@ -286,5 +298,48 @@ async function handleSubmit() {
 
 .guest-link:hover {
   text-decoration: underline;
+}
+
+.demo-account {
+  margin-top: 20px;
+  padding: 14px 16px;
+  background: linear-gradient(135deg, #FFF9F2 0%, #FEF3C7 100%);
+  border: 1px dashed var(--color-primary);
+  border-radius: var(--radius-md);
+  text-align: center;
+}
+
+.demo-title {
+  font-size: var(--text-xs);
+  color: var(--color-primary);
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.demo-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  font-size: var(--text-xs);
+  margin-bottom: 4px;
+}
+
+.demo-row:last-child {
+  margin-bottom: 0;
+}
+
+.demo-label {
+  color: var(--color-muted);
+}
+
+.demo-value {
+  color: var(--color-ink);
+  font-weight: 500;
+  font-family: monospace;
+  background: white;
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border);
 }
 </style>
